@@ -1,0 +1,87 @@
+body {
+  background-color: #7432f915;
+  font-family: "Poppins", sans-serif;
+}
+
+.logo {
+  width: auto;
+  height: 80px;
+}
+
+.custom-control-input:checked[type="checkbox"] {
+  border-color: #7532f9 !important;
+  background-color: #7532f9 !important;
+  box-shadow: 0 0 0 0.2rem #7432f948 !important;
+}
+
+.button-success,
+.button-success:hover,
+.button-success:active {
+  background: #7532f9;
+  color: #fff;
+  padding: 8px;
+  border: none;
+  border-radius: 4px;
+  font-weight: 400;
+  box-shadow: 3px 4px 8px #7432f918;
+  text-decoration: none;
+  align-self: center;
+}
+
+.myCard {
+  background: #fff;
+  padding: 16px;
+  height: 90%;
+  box-shadow: 3px 4px 8px #7432f918;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.content {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+/* progess bar  */
+.progresses {
+  display: flex;
+  align-items: center;
+}
+
+.line {
+  width: 60px;
+  height: 1px;
+  background: #7532f9;
+}
+
+.line-completed {
+  width: 80px;
+  height: 6px;
+  background: #7532f9;
+}
+
+.steps {
+  display: flex;
+  background-color: #7532f9;
+  color: #fff;
+  font-size: 14px;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.steps-outline {
+  display: flex;
+  background-color: #fff;
+  color: #000;
+  font-size: 14px;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid #7532f9;
+}

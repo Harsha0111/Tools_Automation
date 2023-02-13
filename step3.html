@@ -48,13 +48,13 @@
 
                   <span class="line"></span>
 
-                  <div class="steps-outline">
+                  <div class="steps">
                     <span class="font-weight-bold">2</span>
                   </div>
 
                   <span class="line"></span>
 
-                  <div class="steps-outline">
+                  <div class="steps">
                     <span class="font-weight-bold">3</span>
                   </div>
 
@@ -66,40 +66,40 @@
                 </div>
               </div>
               <div class="content">
-                <p class="h6 mt-5 mb-3 bs-secondary-color">
-                  Please select the tools to install
-                </p>
-                <div class="form-check d-flex mb-2">
-                  <input
-                    class="form-check-input custom-control-input"
-                    type="checkbox"
-                    value="Jenkin"
-                    id="flexCheckDefault"
-                  />
-                  <label class="form-check-label mx-3" for="flexCheckDefault">
-                    Jenkin
-                  </label>
-                </div>
-                <div class="form-check d-flex mb-2">
-                  <input
-                    class="form-check-input custom-control-input"
-                    type="checkbox"
-                    value="Git"
-                    id="flexCheckChecked"
-                  />
-                  <label class="form-check-label mx-3" for="flexCheckChecked">
-                    Git
-                  </label>
-                </div>
+                <label for="ip" class="form-label mt-4 bs-secondary-color"
+                  >Server Ip Address</label
+                >
+                <input
+                  type="text"
+                  class="form-control mb-2"
+                  id="ip"
+                  placeholder="eg: 76.2.210.118"
+                /><label for="username" class="form-label bs-secondary-color"
+                  >UserName</label
+                >
+                <input
+                  type="text"
+                  class="form-control form-control-sm mb-2"
+                  id="username"
+                  placeholder="eg: ubuntu"
+                /><label for="username" class="form-label bs-secondary-color"
+                  >Private key</label
+                >
+                <input
+                  type="file"
+                  class="form-control"
+                  id="username"
+                  placeholder="eg: ubuntu"
+                />
               </div>
             </div>
 
             <a
               type="button"
-              href="step2.html"
+              href="step4.html"
               class="button-success my-3 text-center w-25"
             >
-              Continue
+              Login
             </a>
           </div>
         </div>
@@ -108,30 +108,3 @@
     </div>
   </body>
 </html>
-
-<!-- // https://medium.com/weekly-webtips/how-to-ssh-using-node-js-f41952afe1da
-
-  // Ubuntu Version
-  // -- 20.04 LTS	
-  // -- 22.04 LTS	
-
-  // Server IP-address
-  // username
-  // private key
-
-  // -- Java 11
-  // ==== 20.04 LTS - https://www.linode.com/docs/guides/how-to-install-openjdk-on-ubuntu-20-04/
-  // ==== 22.04 LTS - https://www.linuxcapable.com/how-to-install-openjdk-11-on-ubuntu-22-04-lts/
-  // -- Java 17
-  // ==== 20.04 LTS - https://www.rosehosting.com/blog/how-to-install-java-17-lts-on-ubuntu-20-04/
-  // ==== 22.04 LTS - https://www.itzgeek.com/how-tos/linux/ubuntu-how-tos/install-java-jdk-17-on-ubuntu-22-04.html
-
-  // Jenkins 
-  // -- 20.04 LTS	
-  // -- 22.04 LTS	
-  // -- https://www.linuxtechi.com/install-configure-jenkins-ubuntu/
-
-  // Git 
-  // -- 20.04 LTS	
-  // -- 22.04 LTS	
-  // -- https://linuxhint.com/install-git-ubuntu22-04/ -->
