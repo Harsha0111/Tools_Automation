@@ -42,26 +42,34 @@
                 class="container d-flex justify-content-center align-items-center"
               >
                 <div class="progresses">
-                  <div class="steps">
-                    <span class="font-weight-bold">1</span>
+                  <div>
+                    <a href="index.html" class="steps">
+                      <span class="font-weight-bold">1</span>
+                    </a>
                   </div>
 
                   <span class="line"></span>
 
-                  <div class="steps">
-                    <span class="font-weight-bold">2</span>
+                  <div>
+                    <a href="step2.html" class="steps">
+                      <span class="font-weight-bold">2</span>
+                    </a>
                   </div>
 
                   <span class="line"></span>
 
-                  <div class="steps">
-                    <span class="font-weight-bold">3</span>
+                  <div>
+                    <a href="step3.html" class="steps">
+                      <span class="font-weight-bold">3</span>
+                    </a>
                   </div>
 
                   <span class="line"></span>
 
-                  <div class="steps">
-                    <span class="font-weight-bold">4</span>
+                  <div>
+                    <a href="#" class="steps">
+                      <span class="font-weight-bold">4</span>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -75,13 +83,19 @@
                   id="port"
                   placeholder="eg: 8080"
                 />
+                <span
+                  id="portError"
+                  class="text-danger font-weight-bold error"
+                ></span>
               </div>
+              
             </div>
 
+            <!-- href="step5.html" -->
             <a
               type="button"
-              href="step5.html"
               class="button-success my-3 text-center w-25"
+              onclick="myfun()"
             >
               Install
             </a>
@@ -90,5 +104,24 @@
         <div class="col-3"></div>
       </div>
     </div>
+
+    <!-- Validation -->
+    <script type="text/javascript">
+      const myfun = () => {
+        let port = document.getElementById("port").value;
+        let portError = document.getElementById("portError");
+
+        if (isNaN(port)) {
+          portError.innerHTML = "**Port number should be numbers";
+        } else if (port == "") {
+          portError.innerHTML = "**Port number can't be empty";
+        } else if (port.length!=4) {
+          portError.innerHTML = "**Please enter valid port number";
+        } else {
+          portError.innerHTML = "";
+          window.location.href='step5.html';
+        }
+      };
+    </script>
   </body>
 </html>

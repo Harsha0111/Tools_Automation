@@ -42,26 +42,34 @@
                 class="container d-flex justify-content-center align-items-center"
               >
                 <div class="progresses">
-                  <div class="steps">
-                    <span class="font-weight-bold">1</span>
+                  <div>
+                    <a href="index.html" class="steps">
+                      <span class="font-weight-bold">1</span>
+                    </a>
                   </div>
 
                   <span class="line"></span>
 
-                  <div class="steps">
-                    <span class="font-weight-bold">2</span>
+                  <div>
+                    <a href="#" class="steps">
+                      <span class="font-weight-bold">2</span>
+                    </a>
                   </div>
 
                   <span class="line"></span>
 
-                  <div class="steps-outline">
-                    <span class="font-weight-bold">3</span>
+                  <div>
+                    <a href="#" class="steps-outline">
+                      <span class="font-weight-bold">3</span>
+                    </a>
                   </div>
 
                   <span class="line"></span>
 
-                  <div class="steps-outline">
-                    <span class="font-weight-bold">4</span>
+                  <div>
+                    <a href="#" class="steps-outline">
+                      <span class="font-weight-bold">4</span>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -69,26 +77,45 @@
                 <p class="h6 mt-5 mb-1 bs-secondary-color">
                   Please select the Ubuntu version
                 </p>
-                <select class="form-select" aria-label="Default select example">
+                <select
+                  class="form-select"
+                  aria-label="Default select example"
+                  id="ubuntuVersion"
+                >
                   <option selected>Ubuntu version</option>
                   <option value="20.04">20.04 LTS</option>
                   <option value="22.04">22.04 LTS</option>
                 </select>
+                <p
+                  id="ubuntuVersionError"
+                  class="text-danger font-weight-bold error"
+                ></p>
+
                 <p class="h6 mt-3 mb-1 bs-secondary-color">
                   Please select the Java version
                 </p>
-                <select class="form-select" aria-label="Default select example">
+                <select
+                  class="form-select"
+                  aria-label="Default select example"
+                  id="javaVersion"
+                >
                   <option selected>Java version</option>
                   <option value="11">Java 11</option>
                   <option value="17">Java 17</option>
                 </select>
+                <p
+                id="javaVersionError"
+                class="text-danger font-weight-bold error"
+              ></p>
               </div>
+              
             </div>
 
+            <!-- href="step3.html" -->
             <a
               type="button"
-              href="step3.html"
               class="button-success my-3 text-center w-25"
+              onclick="validate()"
             >
               Select
             </a>
@@ -97,5 +124,29 @@
         <div class="col-3"></div>
       </div>
     </div>
+
+    <!-- Validation -->
+    <script type="text/javascript">
+      const validate = () => {
+        let ubuntuVersion = document.getElementById("ubuntuVersion").value;
+        let javaVersion = document.getElementById("javaVersion").value;
+
+        let ubuntuVersionError = document.getElementById("ubuntuVersionError");
+        let javaVersionError = document.getElementById("javaVersionError");
+
+        if (ubuntuVersion === "Ubuntu version") {
+          ubuntuVersionError.innerHTML = "**Please choose any one version";
+        } else {
+          ubuntuVersionError.innerHTML = "";
+        }
+
+        if (javaVersion === "Java version") {
+          javaVersionError.innerHTML = "**Please choose any one version";
+        } else {
+          javaVersionError.innerHTML = "";
+          window.location.href='step3.html';
+        }
+      };
+    </script>
   </body>
 </html>

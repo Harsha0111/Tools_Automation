@@ -71,6 +71,7 @@ body {
   align-items: center;
   justify-content: center;
   border-radius: 50%;
+  text-decoration: none;
 }
 
 .steps-outline {
@@ -84,4 +85,9 @@ body {
   justify-content: center;
   border-radius: 50%;
   border: 1px solid #7532f9;
+  text-decoration: none;
+}
+
+.error{
+  height: 10px;
 }

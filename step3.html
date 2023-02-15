@@ -42,30 +42,40 @@
                 class="container d-flex justify-content-center align-items-center"
               >
                 <div class="progresses">
-                  <div class="steps">
-                    <span class="font-weight-bold">1</span>
+                  <div>
+                    <a href="index.html" class="steps">
+                      <span class="font-weight-bold">1</span>
+                    </a>
                   </div>
 
                   <span class="line"></span>
 
-                  <div class="steps">
-                    <span class="font-weight-bold">2</span>
+                  <div>
+                    <a href="step2.html" class="steps">
+                      <span class="font-weight-bold">2</span>
+                    </a>
                   </div>
 
                   <span class="line"></span>
 
-                  <div class="steps">
-                    <span class="font-weight-bold">3</span>
+                  <div>
+                    <a href="#" class="steps">
+                      <span class="font-weight-bold">3</span>
+                    </a>
                   </div>
 
                   <span class="line"></span>
 
-                  <div class="steps-outline">
-                    <span class="font-weight-bold">4</span>
+                  <div>
+                    <a href="#" class="steps-outline">
+                      <span class="font-weight-bold">4</span>
+                    </a>
                   </div>
                 </div>
               </div>
+
               <div class="content">
+                <!-- ip -->
                 <label for="ip" class="form-label mt-4 bs-secondary-color"
                   >Server Ip Address</label
                 >
@@ -74,30 +84,40 @@
                   class="form-control mb-2"
                   id="ip"
                   placeholder="eg: 76.2.210.118"
-                /><label for="username" class="form-label bs-secondary-color"
+                />
+                <p id="ipError" class="text-danger font-weight-bold error"></p>
+
+                <!-- username -->
+                <label for="userName" class="form-label bs-secondary-color"
                   >UserName</label
                 >
                 <input
                   type="text"
                   class="form-control form-control-sm mb-2"
-                  id="username"
+                  id="userName"
                   placeholder="eg: ubuntu"
-                /><label for="username" class="form-label bs-secondary-color"
+                />
+                <p id="userNameError" class="text-danger font-weight-bold error"></p>
+
+                <!-- key -->
+                <label for="key" class="form-label bs-secondary-color"
                   >Private key</label
                 >
                 <input
                   type="file"
                   class="form-control"
-                  id="username"
-                  placeholder="eg: ubuntu"
+                  id="key"
+                  placeholder="choose file"
                 />
+                <p id="keyError" class="text-danger font-weight-bold error"></p>
               </div>
             </div>
 
+            <!-- href="step4.html" -->
             <a
               type="button"
-              href="step4.html"
               class="button-success my-3 text-center w-25"
+              onclick="serverIp()"
             >
               Login
             </a>
@@ -106,5 +126,62 @@
         <div class="col-3"></div>
       </div>
     </div>
+
+    <!-- Validation -->
+    <script type="text/javascript">
+      const serverIp = () => {
+        let ip = document.getElementById("ip").value;
+        let userName = document.getElementById("userName").value;
+        let key = document.getElementById("key").value;
+
+        let ipError = document.getElementById("ipError");
+        let userNameError = document.getElementById("userNameError");
+        let keyError = document.getElementById("keyError");
+
+        //function for Ip validation
+        const isValidIpv4Addr = (ip) => {
+          return /^(?=\d+\.\d+\.\d+\.\d+$)(?:(?:25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9][0-9]|[0-9])\.?){4}$/.test(
+            ip
+          );
+        };
+
+        //function for file validation
+        const isValidFile = (key) => {
+          // Allowing file type
+          let allowedExtensions = /(\.ppk)$/i;
+          return allowedExtensions.exec(key);
+        };
+
+        // username validation
+        if (userName == "") {
+          userNameError.innerHTML = "**Username can't be empty";
+        } else if (userName.length <= 2) {
+          userNameError.innerHTML = "**Please enter valid Username";
+        } else if (!isNaN(userName)) {
+          userNameError.innerHTML = "**Numbers not allowed";
+        }
+         else {
+          userNameError.innerHTML = "";
+        }
+
+        // ip validation
+        if (ip == "") {
+          ipError.innerHTML = "**Please enter Ip Address";
+        } else if (!isNaN(ip) || !isValidIpv4Addr(ip)) {
+          ipError.innerHTML = "**Please enter valid Ip Address";
+        } else {
+          ipError.innerHTML = "";
+        }
+
+        // file validation
+        if (key == "") {
+          keyError.innerHTML = "**Please choose a Private key";
+        } else if (!isValidFile(key)) {
+          keyError.innerHTML = "**Please choosa .ppk file only";
+        }else{
+          window.location.href='step4.html';
+        }
+      };
+    </script>
   </body>
 </html>
