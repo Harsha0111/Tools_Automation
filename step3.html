@@ -97,7 +97,10 @@
                   id="userName"
                   placeholder="eg: ubuntu"
                 />
-                <p id="userNameError" class="text-danger font-weight-bold error"></p>
+                <p
+                  id="userNameError"
+                  class="text-danger font-weight-bold error"
+                ></p>
 
                 <!-- key -->
                 <label for="key" class="form-label bs-secondary-color"
@@ -159,8 +162,7 @@
           userNameError.innerHTML = "**Please enter valid Username";
         } else if (!isNaN(userName)) {
           userNameError.innerHTML = "**Numbers not allowed";
-        }
-         else {
+        } else {
           userNameError.innerHTML = "";
         }
 
@@ -178,8 +180,8 @@
           keyError.innerHTML = "**Please choose a Private key";
         } else if (!isValidFile(key)) {
           keyError.innerHTML = "**Please choose a .ppk file only";
-        }else{
-          window.location.href='step4.html';
+        } else {
+          window.location.href = "step4.html";
         }
       };
     </script>
