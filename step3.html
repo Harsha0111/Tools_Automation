@@ -133,6 +133,10 @@
     <!-- Validation -->
     <script type="text/javascript">
       const serverIp = () => {
+        let isIpEntered = false;
+        let isUserNameEntered = false;
+        let isKeyEntered = false;
+
         let ip = document.getElementById("ip").value;
         let userName = document.getElementById("userName").value;
         let key = document.getElementById("key").value;
@@ -163,6 +167,7 @@
         } else if (!isNaN(userName)) {
           userNameError.innerHTML = "**Numbers not allowed";
         } else {
+          isUserNameEntered = true;
           userNameError.innerHTML = "";
         }
 
@@ -172,6 +177,7 @@
         } else if (!isNaN(ip) || !isValidIpv4Addr(ip)) {
           ipError.innerHTML = "**Please enter valid Ip Address";
         } else {
+          isIpEntered = true;
           ipError.innerHTML = "";
         }
 
@@ -181,6 +187,11 @@
         } else if (!isValidFile(key)) {
           keyError.innerHTML = "**Please choose a .ppk file only";
         } else {
+          isKeyEntered = true;
+          keyError.innerHTML = "";
+        }
+
+        if (isIpEntered && isKeyEntered && isUserNameEntered) {
           window.location.href = "step4.html";
         }
       };

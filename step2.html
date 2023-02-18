@@ -104,11 +104,10 @@
                   <option value="17">Java 17</option>
                 </select>
                 <p
-                id="javaVersionError"
-                class="text-danger font-weight-bold error"
-              ></p>
+                  id="javaVersionError"
+                  class="text-danger font-weight-bold error"
+                ></p>
               </div>
-              
             </div>
 
             <!-- href="step3.html" -->
@@ -128,6 +127,9 @@
     <!-- Validation -->
     <script type="text/javascript">
       const validate = () => {
+        let isUbuntuSelected = false;
+        let isJavaSelected = false;
+
         let ubuntuVersion = document.getElementById("ubuntuVersion").value;
         let javaVersion = document.getElementById("javaVersion").value;
 
@@ -137,14 +139,18 @@
         if (ubuntuVersion === "Ubuntu version") {
           ubuntuVersionError.innerHTML = "**Please choose any one version";
         } else {
+          isUbuntuSelected = true;
           ubuntuVersionError.innerHTML = "";
         }
 
         if (javaVersion === "Java version") {
           javaVersionError.innerHTML = "**Please choose any one version";
         } else {
+          isJavaSelected = true;
           javaVersionError.innerHTML = "";
-          window.location.href='step3.html';
+        }
+        if (isUbuntuSelected && isJavaSelected) {
+          window.location.href = "step3.html";
         }
       };
     </script>
