@@ -17,7 +17,9 @@
   },
   "homepage": "https://github.com/Harsha0111/Tools_Automation#readme",
   "dependencies": {
+    "body-parser": "^1.20.1",
     "ejs": "^3.1.8",
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "node-ssh": "^13.0.1"
   }
 }

@@ -7,7 +7,7 @@
       <div class="row h-100">
         <div class="col-3"></div>
         <div class="col-6">
-          <div class="myCard my-4">
+          <form method="POST" action="/install" class="myCard my-4">
             <div>
               <img
                 src="images/NSE_IT.png"
@@ -60,23 +60,25 @@
                   type="text"
                   class="form-control mb-3"
                   id="port"
+                  name="port"
                   placeholder="eg: 8080"
+                  value=<%= port.port %>
                 />
                 <span
                   id="portError"
                   class="text-danger font-weight-bold error"
-                ></span>
+                ><%= error %></span>
               </div>
             </div>
 
             <!-- href="step5.html" -->
-            <a
-              type="button"
+            <!-- i/p changed, type sub -->
+            <input
+              type="submit"
               class="button-success my-3 text-center w-25"
-              onclick="myfun()"
-            >
-              Install
-            </a>
+              value="Install"
+            />
+              
           </div>
         </div>
         <div class="col-3"></div>

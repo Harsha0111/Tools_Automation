@@ -7,7 +7,7 @@
       <div class="row h-100">
         <div class="col-3"></div>
         <div class="col-6">
-          <div class="myCard my-4">
+          <form method="post" action="/version" class="myCard my-4">
             <div>
               <img
                 src="images/NSE_IT.png"
@@ -60,15 +60,24 @@
                   class="form-select"
                   aria-label="Default select example"
                   id="ubuntuVersion"
+                  name="ubuntuVersion"
                 >
-                  <option selected>Ubuntu version</option>
-                  <option value="20.04">20.04 LTS</option>
-                  <option value="22.04">22.04 LTS</option>
+                  <option value="Ubuntu version" <%= selectedVersions.ubuntu === "Ubuntu version" ? "selected" : "" %> 
+                  >
+                    Ubuntu version </option>
+                  <option value="20.04" 
+                  <%= selectedVersions.ubuntu ==="20.04" ? "selected" : "" %> 
+                  >20.04 LTS</option>
+                  <option value="22.04" 
+                  <%= selectedVersions.ubuntu ==="22.04" ? "selected" : "" %> 
+                  >22.04 LTS</option>
                 </select>
                 <p
                   id="ubuntuVersionError"
                   class="text-danger font-weight-bold error"
-                ></p>
+                >
+                  <%= ubuntuVersionError %>
+                </p>
 
                 <p class="h6 mt-3 mb-1 bs-secondary-color">
                   Please select the Java version
@@ -77,61 +86,34 @@
                   class="form-select"
                   aria-label="Default select example"
                   id="javaVersion"
+                  name="javaVersion"
                 >
-                  <option selected>Java version</option>
-                  <option value="11">Java 11</option>
-                  <option value="17">Java 17</option>
+                  <option value="Java version" 
+                  <%= selectedVersions.java ==="Java version" ? "selected" : "" %> >Java version</option>
+                  <option value="11"
+                  <%= selectedVersions.java ==="11" ? "selected" : "" %>>Java 11</option>
+                  <option value="17">
+                    <%= selectedVersions.java ==="17" ? "selected" : "" %>Java 17</option>
                 </select>
                 <p
                   id="javaVersionError"
                   class="text-danger font-weight-bold error"
-                ></p>
+                >
+                  <%= javaVersionError %>
+                </p>
               </div>
             </div>
 
             <!-- href="step3.html" -->
-            <a
-              type="button"
+            <input
+              type="submit"
+              value="Select"
               class="button-success my-3 text-center w-25"
-              onclick="validate()"
-            >
-              Select
-            </a>
-          </div>
+            />
+          </form>
         </div>
         <div class="col-3"></div>
       </div>
     </div>
-
-    <!-- Validation -->
-    <script type="text/javascript">
-      const validate = () => {
-        let isUbuntuSelected = false;
-        let isJavaSelected = false;
-
-        let ubuntuVersion = document.getElementById("ubuntuVersion").value;
-        let javaVersion = document.getElementById("javaVersion").value;
-
-        let ubuntuVersionError = document.getElementById("ubuntuVersionError");
-        let javaVersionError = document.getElementById("javaVersionError");
-
-        if (ubuntuVersion === "Ubuntu version") {
-          ubuntuVersionError.innerHTML = "**Please choose any one version";
-        } else {
-          isUbuntuSelected = true;
-          ubuntuVersionError.innerHTML = "";
-        }
-
-        if (javaVersion === "Java version") {
-          javaVersionError.innerHTML = "**Please choose any one version";
-        } else {
-          isJavaSelected = true;
-          javaVersionError.innerHTML = "";
-        }
-        if (isUbuntuSelected && isJavaSelected) {
-          window.location.href = "server";
-        }
-      };
-    </script>
   </body>
 </html>

@@ -6,7 +6,7 @@
       <div class="row h-100">
         <div class="col-3"></div>
         <div class="col-6">
-          <div class="myCard my-4">
+          <form method="post" action="/" class="myCard my-4">
             <div>
               <img
                 src="images/NSE_IT.png"
@@ -57,63 +57,39 @@
                 </p>
 
                 <div class="form-check d-flex mb-2">
-                  <input
-                    class="form-check-input custom-control-input"
-                    type="checkbox"
-                    value="Jenkin"
-                    id="jenkins"
-                    name="container"
-                  />
+                  <input class="form-check-input custom-control-input"
+                  type="checkbox" value="Jenkins" id="jenkins" name="jenkins"
+                  <%= selectedTools.jenkins==="Jenkins" ? "checked" : "" %> />
                   <label class="form-check-label mx-3" for="jenkins">
                     Jenkins
                   </label>
                 </div>
                 <div class="form-check d-flex mb-2">
-                  <input
-                    class="form-check-input custom-control-input"
-                    type="checkbox"
-                    value="Git"
-                    id="git"
-                    name="container"
+                  <input class="form-check-input
+                  custom-control-input"type="checkbox" value="Git" id="git"
+                  name="git" <%= selectedTools.git ==="Git" ? "checked" : "" %>
                   />
                   <label class="form-check-label mx-3" for="git"> Git </label>
                 </div>
-                <span
-                  id="error"
-                  class="text-danger font-weight-bold error"
-                ></span>
+                <span id="error" class="text-danger font-weight-bold error"
+                  ><%= error %></span
+                >
               </div>
             </div>
             <!-- href="step2.html" -->
-            <a
-              type="button"
+            <input
+              type="submit"
               class="button-success my-3 text-center w-25"
               id="button"
-              onclick="validate()"
-            >
-              Continue
-            </a>
-          </div>
+              value="Continue"
+            />
+          </form>
         </div>
         <div class="col-3"></div>
       </div>
     </div>
 
     <!-- Validation -->
-    <script type="text/javascript">
-      const validate = () => {
-        let jenkinsCheckBox = document.getElementById("jenkins");
-        let gitCheckBox = document.getElementById("git");
-        let error = document.getElementById("error");
-
-        if (!jenkinsCheckBox.checked && !gitCheckBox.checked) {
-          error.innerHTML = "**Please choose any one tool";
-        } else {
-          error.innerHTML = "";
-          window.location.href = "version";
-        }
-      };
-    </script>
   </body>
 </html>
 
