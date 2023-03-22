@@ -7,7 +7,7 @@
       <div class="row h-100">
         <div class="col-3"></div>
         <div class="col-6">
-          <form method="POST" action="/install" class="myCard my-4">
+          <form method="post" action="/install" class="myCard my-4">
             <div>
               <img
                 src="images/NSE_IT.png"
@@ -52,56 +52,198 @@
                   </div>
                 </div>
               </div>
-              <div class="content">
-                <label for="port" class="form-label mt-5 bs-secondary-color"
+              <div class="content pt-3">
+                <% if(selectedTools.jenkins) { %>
+                <label for="port" class="form-label mt-1 bs-secondary-color"
                   >Jenkins port</label
                 >
                 <input
                   type="text"
                   class="form-control mb-3"
-                  id="port"
-                  name="port"
+                  id="jenkinsPort"
+                  name="jenkinsPort"
+                  value="<%= selectedPorts.jenkinsPort %>"
                   placeholder="eg: 8080"
-                  value=<%= port.port %>
                 />
-                <span
-                  id="portError"
+                <p
+                  id="jenkinsPortError"
                   class="text-danger font-weight-bold error"
-                ><%= error %></span>
+                >
+                  <%= jenkinsPortError%>
+                </p>
+                <% } %> <% if(selectedTools.nexus) { %>
+                <label
+                  for="nexusPort"
+                  class="form-label mt-1 bs-secondary-color"
+                  >Nexus port</label
+                >
+                <input
+                  type="text"
+                  class="form-control mb-3"
+                  id="nexusPort"
+                  name="nexusPort"
+                  value="<%= selectedPorts.nexusPort %>"
+                  placeholder="eg: 8081"
+                />
+                <p
+                  id="nexusPortError"
+                  class="text-danger font-weight-bold error"
+                >
+                  <%= nexusPortError%>
+                </p>
+                <% } %> <% if(selectedTools.sonarQube) { %>
+                <label
+                  for="sonarPort"
+                  class="form-label mt-1 bs-secondary-color"
+                  >SonarQube port</label
+                >
+                <input
+                  type="text"
+                  class="form-control mb-3"
+                  id="sonarPort"
+                  name="sonarPort"
+                  value="<%= selectedPorts.sonarPort %>"
+                  placeholder="eg: 9000"
+                />
+                <p
+                  id="sonarPortError"
+                  class="text-danger font-weight-bold error"
+                >
+                  <%= sonarPortError%>
+                </p>
+                <% } %>
               </div>
             </div>
+            <section id="home" style="display: none">
+              <p>
+                Loading... <% if(selectedTools.jenkins) { %> Installing Java <%=
+                selectedVersions.java %>, Jenkins on the ubuntu server <%=
+                selectedVersions.ubuntu %>.
+                <br />
+                <% } %> <% if(selectedTools.nexus) { %> Installing Java <%=
+                selectedVersions.javaSonarVersion %> on the ubuntu server <%=
+                selectedVersions.ubuntu %>.
+                <br />
+                <% } %> <% if(selectedTools.sonarQube) { %>
+                <br />
+                Installing Java <%= selectedVersions.javaSonarVersion %> on the
+                ubuntu server <%= selectedVersions.ubuntu %>. <% } %>
+                <br />
+                Please wait for few seconds.
+              </p>
+            </section>
 
-            <!-- href="step5.html" -->
-            <!-- i/p changed, type sub -->
             <input
               type="submit"
               class="button-success my-3 text-center w-25"
               value="Install"
+              id="btn"
             />
-              
-          </div>
+          </form>
         </div>
         <div class="col-3"></div>
       </div>
     </div>
-
-    <!-- Validation -->
-    <script type="text/javascript">
-      const myfun = () => {
-        let port = document.getElementById("port").value;
-        let portError = document.getElementById("portError");
-
-        if (isNaN(port)) {
-          portError.innerHTML = "**Port number should be numbers";
-        } else if (port == "") {
-          portError.innerHTML = "**Port number can't be empty";
-        } else if (port.length != 4) {
-          portError.innerHTML = "**Please enter valid port number";
-        } else {
-          portError.innerHTML = "";
-          window.location.href = "success";
-        }
-      };
-    </script>
   </body>
+
+  <%- include ('./partials/footer') %>
+  <script>
+    (function (e) {
+      "use strict";
+      e.fn.textTyper = function (t) {
+        var n = {
+            typingClass: "typing",
+            beforeAnimation: function () {},
+            afterAnimation: function () {},
+            speed: 10,
+            nextLineDelay: 400,
+            startsFrom: 0,
+            repeatAnimation: false,
+            repeatDelay: 4e3,
+            repeatTimes: 1,
+            cursorHtml: '<span class="cursor">|</span>',
+          },
+          r = e.extend({}, n, t);
+        this.each(function () {
+          var t = e(this),
+            n = 1,
+            i = "typingCursor";
+          var s = t,
+            o = s.length,
+            u = [];
+          while (o--) {
+            u[o] = e.trim(e(s[o]).html());
+            e(s[o]).html("");
+          }
+          t.init = function (e) {
+            var n = r.beforeAnimation;
+            if (n) n();
+            t.animate(0);
+          };
+          t.animate = function (o) {
+            var a = s[o],
+              f = r.typingClass,
+              l = r.startsFrom;
+            e(a).addClass(f);
+            var c = setInterval(function () {
+              var f = r.cursorHtml;
+              f = e("<div>").append(e(f).addClass(i)).html();
+              e(a).html(u[o].substr(0, l) + f);
+              l++;
+              if (u[o].length < l) {
+                clearInterval(c);
+                o++;
+                if (s[o]) {
+                  setTimeout(function () {
+                    e(a).html(u[o - 1]);
+                    t.animate(o);
+                  }, r.nextLineDelay);
+                } else {
+                  e(a)
+                    .find("." + i)
+                    .remove();
+                  if (
+                    r.repeatAnimation &&
+                    (r.repeatTimes == 0 || n < r.repeatTimes)
+                  ) {
+                    setTimeout(function () {
+                      t.animate(0);
+                      n++;
+                    }, r.repeatDelay);
+                  } else {
+                    var h = r.afterAnimation;
+                    if (h) h();
+                  }
+                }
+              }
+            }, r.speed);
+          };
+          t.init();
+        });
+        return this;
+      };
+    })(jQuery);
+
+    $(document).ready(function () {
+      $("#home").addClass("open");
+      $("#home").textTyper({
+        speed: 20,
+        afterAnimation: function () {
+          $(".command").fadeIn();
+        },
+      });
+
+      var sectionArray = [];
+      $("section").each(function (i, e) {
+        sectionArray.push($(e).attr("id"));
+      });
+    });
+  </script>
+  <script>
+    window.onload = function () {
+      document.getElementById("btn").addEventListener("click", () => {
+        document.getElementById("home").style.display = "block";
+      });
+    };
+  </script>
 </html>

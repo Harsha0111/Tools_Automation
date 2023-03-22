@@ -71,6 +71,24 @@
                   />
                   <label class="form-check-label mx-3" for="git"> Git </label>
                 </div>
+                <div class="form-check d-flex mb-2">
+                  <input class="form-check-input
+                  custom-control-input"type="checkbox" value="nexus" id="nexus"
+                  name="nexus" <%= selectedTools.nexus ==="nexus" ? "checked" : ""
+                  %> />
+                  <label class="form-check-label mx-3" for="nexus">
+                    Nexus
+                  </label>
+                </div>
+                <div class="form-check d-flex mb-2">
+                  <input class="form-check-input
+                  custom-control-input"type="checkbox" value="sonarQube"
+                  id="sonarQube" name="sonarQube" <%= selectedTools.sonarQube
+                  ==="sonarQube" ? "checked" : "" %> />
+                  <label class="form-check-label mx-3" for="sonarQube">
+                    SonarQube
+                  </label>
+                </div>
                 <span id="error" class="text-danger font-weight-bold error"
                   ><%= error %></span
                 >
@@ -88,8 +106,6 @@
         <div class="col-3"></div>
       </div>
     </div>
-
-    <!-- Validation -->
   </body>
 </html>
 

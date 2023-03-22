@@ -7,7 +7,12 @@
       <div class="row h-100">
         <div class="col-3"></div>
         <div class="col-6">
-          <div class="myCard my-4">
+          <form
+            method="POST"
+            action="/server"
+            encType="multipart/form-data"
+            class="myCard my-4"
+          >
             <div>
               <img
                 src="images/NSE_IT.png"
@@ -62,9 +67,13 @@
                   type="text"
                   class="form-control mb-2"
                   id="ip"
+                  name="ip"
+                  value="<%= serverDetails.ip %>"
                   placeholder="eg: 76.2.210.118"
                 />
-                <p id="ipError" class="text-danger font-weight-bold error"></p>
+                <p id="ipError" class="text-danger font-weight-bold error">
+                  <%= ipError %>
+                </p>
 
                 <!-- username -->
                 <label for="userName" class="form-label bs-secondary-color"
@@ -74,12 +83,16 @@
                   type="text"
                   class="form-control form-control-sm mb-2"
                   id="userName"
+                  name="username"
+                  value="<%= serverDetails.username %>"
                   placeholder="eg: ubuntu"
                 />
                 <p
                   id="userNameError"
                   class="text-danger font-weight-bold error"
-                ></p>
+                >
+                  <%= userNameError %>
+                </p>
 
                 <!-- key -->
                 <label for="key" class="form-label bs-secondary-color"
@@ -89,91 +102,26 @@
                   type="file"
                   class="form-control"
                   id="key"
+                  name="key"
                   placeholder="choose file"
                 />
-                <p id="keyError" class="text-danger font-weight-bold error"></p>
+                <p id="keyError" class="text-danger font-weight-bold error">
+                  <%= keyError %>
+                </p>
               </div>
             </div>
 
             <!-- href="step4.html" -->
-            <a
-              type="button"
+            <input
+              type="submit"
               class="button-success my-3 text-center w-25"
-              onclick="serverIp()"
-            >
-              Login
-            </a>
-          </div>
+              value="Login"
+            />
+          </form>
         </div>
         <div class="col-3"></div>
       </div>
     </div>
 
-    <!-- Validation -->
-    <script type="text/javascript">
-      const serverIp = () => {
-        let isIpEntered = false;
-        let isUserNameEntered = false;
-        let isKeyEntered = false;
-
-        let ip = document.getElementById("ip").value;
-        let userName = document.getElementById("userName").value;
-        let key = document.getElementById("key").value;
-
-        let ipError = document.getElementById("ipError");
-        let userNameError = document.getElementById("userNameError");
-        let keyError = document.getElementById("keyError");
-
-        //function for Ip validation
-        const isValidIpv4Addr = (ip) => {
-          return /^(?=\d+\.\d+\.\d+\.\d+$)(?:(?:25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9][0-9]|[0-9])\.?){4}$/.test(
-            ip
-          );
-        };
-
-        //function for file validation
-        const isValidFile = (key) => {
-          // Allowing file type
-          let allowedExtensions = /(\.ppk)$/i;
-          return allowedExtensions.exec(key);
-        };
-
-        // username validation
-        if (userName == "") {
-          userNameError.innerHTML = "**Username can't be empty";
-        } else if (userName.length <= 2) {
-          userNameError.innerHTML = "**Please enter valid Username";
-        } else if (!isNaN(userName)) {
-          userNameError.innerHTML = "**Numbers not allowed";
-        } else {
-          isUserNameEntered = true;
-          userNameError.innerHTML = "";
-        }
-
-        // ip validation
-        if (ip == "") {
-          ipError.innerHTML = "**Please enter Ip Address";
-        } else if (!isNaN(ip) || !isValidIpv4Addr(ip)) {
-          ipError.innerHTML = "**Please enter valid Ip Address";
-        } else {
-          isIpEntered = true;
-          ipError.innerHTML = "";
-        }
-
-        // file validation
-        if (key == "") {
-          keyError.innerHTML = "**Please choose a Private key";
-        } else if (!isValidFile(key)) {
-          keyError.innerHTML = "**Please choose a .ppk file only";
-        } else {
-          isKeyEntered = true;
-          keyError.innerHTML = "";
-        }
-
-        if (isIpEntered && isKeyEntered && isUserNameEntered) {
-          window.location.href = "install";
-        }
-      };
-    </script>
   </body>
 </html>

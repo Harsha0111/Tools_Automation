@@ -78,29 +78,48 @@
                 >
                   <%= ubuntuVersionError %>
                 </p>
+              
+                <% if(selectedTools.jenkins) { %>  
+                  <p class="h6 mt-3 mb-1 bs-secondary-color">
+                    Please select the Java version - Jenkins
+                  </p>
+                  <select
+                    class="form-select"
+                    aria-label="Default select example"
+                    id="javaVersion"
+                    name="javaVersion"
+                  >
+                    <option value="Java version" 
+                    <%= selectedVersions.java ==="Java version" ? "selected" : "" %> >Java version</option>
+                    <option value="11"
+                    <%= selectedVersions.java ==="11" ? "selected" : "" %>>Java 11</option>
+                    <option value="17"
+                      <%= selectedVersions.java ==="17" ? "selected" : "" %>>Java 17</option>
+                  </select>
+                  <p
+                    id="javaVersionError"
+                    class="text-danger font-weight-bold error"
+                  >
+                    <%= javaVersionError %>
+                  </p>
+                <% } %>
 
-                <p class="h6 mt-3 mb-1 bs-secondary-color">
-                  Please select the Java version
-                </p>
-                <select
-                  class="form-select"
-                  aria-label="Default select example"
-                  id="javaVersion"
-                  name="javaVersion"
-                >
-                  <option value="Java version" 
-                  <%= selectedVersions.java ==="Java version" ? "selected" : "" %> >Java version</option>
-                  <option value="11"
-                  <%= selectedVersions.java ==="11" ? "selected" : "" %>>Java 11</option>
-                  <option value="17">
-                    <%= selectedVersions.java ==="17" ? "selected" : "" %>Java 17</option>
-                </select>
-                <p
-                  id="javaVersionError"
-                  class="text-danger font-weight-bold error"
-                >
-                  <%= javaVersionError %>
-                </p>
+                <% if(selectedTools.nexus  || selectedTools.sonarQube) { %>  
+                  <p class="h6 mt-3 mb-1 bs-secondary-color">
+                    Please select the Java version - SonarQube/Nexus
+                  </p>
+                  <select
+                    class="form-select"
+                    aria-label="Default select example"
+                    id="javaSonarVersion"
+                    name="javaSonarVersion"
+                  >
+                  <option value="8"
+                    <%= selectedVersions.java ==="8" ? "selected" : "" %>>Java 8</option>
+                
+                  </select>
+                <% } %>
+                
               </div>
             </div>
 

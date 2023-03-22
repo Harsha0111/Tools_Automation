@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include ('./partials/head') %>
+
+  <body>
+    <div class="container vh-100">
+      <div class="row h-100">
+        <div class="col-3"></div>
+        <div class="col-6">
+          <div class="myCard my-4">
+            <div>
+              <img
+                src="images/NSE_IT.png"
+                class="rounded mx-auto d-block mt-5 mb-3 logo"
+                alt="NSE_IT"
+              />
+              <h1 class="h2 font-weight-normal text-center mb-3">
+                Tools Automation
+              </h1>
+              <div
+                class="container d-flex justify-content-center align-items-center"
+              ></div>
+            </div>
+
+            <section id="home">
+              <p><%= error %></p>
+            </section>
+            <form method="get" action="/" class="center">
+              <input
+                type="submit"
+                value="Go back"
+                class="button-success my-3 text-center w-25"
+              />
+            </form>
+          </div>
+        </div>
+        <div class="col-3"></div>
+      </div>
+    </div>
+  </body>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script>
+    (function (e) {
+      "use strict";
+      e.fn.textTyper = function (t) {
+        var n = {
+            typingClass: "typing",
+            beforeAnimation: function () {},
+            afterAnimation: function () {},
+            speed: 10,
+            nextLineDelay: 400,
+            startsFrom: 0,
+            repeatAnimation: false,
+            repeatDelay: 4e3,
+            repeatTimes: 1,
+            cursorHtml: '<span class="cursor">|</span>',
+          },
+          r = e.extend({}, n, t);
+        this.each(function () {
+          var t = e(this),
+            n = 1,
+            i = "typingCursor";
+          var s = t,
+            o = s.length,
+            u = [];
+          while (o--) {
+            u[o] = e.trim(e(s[o]).html());
+            e(s[o]).html("");
+          }
+          t.init = function (e) {
+            var n = r.beforeAnimation;
+            if (n) n();
+            t.animate(0);
+          };
+          t.animate = function (o) {
+            var a = s[o],
+              f = r.typingClass,
+              l = r.startsFrom;
+            e(a).addClass(f);
+            var c = setInterval(function () {
+              var f = r.cursorHtml;
+              f = e("<div>").append(e(f).addClass(i)).html();
+              e(a).html(u[o].substr(0, l) + f);
+              l++;
+              if (u[o].length < l) {
+                clearInterval(c);
+                o++;
+                if (s[o]) {
+                  setTimeout(function () {
+                    e(a).html(u[o - 1]);
+                    t.animate(o);
+                  }, r.nextLineDelay);
+                } else {
+                  e(a)
+                    .find("." + i)
+                    .remove();
+                  if (
+                    r.repeatAnimation &&
+                    (r.repeatTimes == 0 || n < r.repeatTimes)
+                  ) {
+                    setTimeout(function () {
+                      t.animate(0);
+                      n++;
+                    }, r.repeatDelay);
+                  } else {
+                    var h = r.afterAnimation;
+                    if (h) h();
+                  }
+                }
+              }
+            }, r.speed);
+          };
+          t.init();
+        });
+        return this;
+      };
+    })(jQuery);
+
+    // Let's do it!!
+    $(document).ready(function () {
+      $("#home").addClass("open");
+      $("#home").textTyper({
+        speed: 20,
+        afterAnimation: function () {
+          $(".command").fadeIn();
+        },
+      });
+
+      // get array of section ids, that exist in DOM
+      var sectionArray = [];
+      // We are using <section> here, you can use <div> or <article> if you want
+      $("section").each(function (i, e) {
+        //you can use e.id instead of $(e).attr('id')
+        sectionArray.push($(e).attr("id"));
+      });
+    });
+  </script>
+</html>

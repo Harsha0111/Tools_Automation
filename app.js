@@ -1,122 +1,47 @@
-const express = require("express");
-const bodyParser = require("body-parser");
+import express from "express";
+import bodyParser from "body-parser";
+import fileUpload from "express-fileupload";
+import path from "path";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
+
+import { postHome, getHome } from "./controllers/index.js";
+import { getVersion, postVersion } from "./controllers/version.js";
+import { getServer, postServer } from "./controllers/server.js";
+import { getInstall, postInstall } from "./controllers/install.js";
+
 const app = express();
 const port = 3000;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 app.set("view engine", "ejs");
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, "public")));
+app.use(fileUpload());
 
 let urlencodedParser = bodyParser.urlencoded({ extended: false });
 
-let selectedTools = { jenkins: "Jenkins", git: null };
-let selectedVersions = { java: "Java version", ubuntu: "Ubuntu version" };
+app.get("/", getHome);
 
-let jenkinsPort = { port: 8080 };
+app.post("/", urlencodedParser, postHome);
 
-// step1
-app.get("/", (req, res) => {
-  res.render("index", { selectedTools: selectedTools, error: "" });
-});
+app.get("/version", urlencodedParser, getVersion);
 
-app.post("/", urlencodedParser, (req, res) => {
-  console.log(req.body);
-  if (!req.body.jenkins || !req.body.git) {
-    res.render("index", {
-      selectedTools: selectedTools,
-      error: "**Please choose any one tool",
-    });
-  } else {
-    selectedTools = { jenkins: req.body.jenkins, git: req.body.git };
-    res.render("version", {
-      selectedVersions: selectedVersions,
-      ubuntuVersionError: "",
-      javaVersionError: "",
-    });
-  }
-});
+app.post("/version", urlencodedParser, postVersion);
 
-// step2
-app.get("/version", (req, res) => {
-  res.render("version", {
-    selectedVersions: selectedVersions,
-    ubuntuVersionError: "",
-    javaVersionError: "",
-  });
-});
+app.get("/server", urlencodedParser, getServer);
 
-app.post("/version", urlencodedParser, (req, res) => {
-  console.log(req.body);
+app.post("/server", urlencodedParser, postServer);
 
-  let isUbuntuSelected = false;
-  let isJavaSelected = false;
+app.get("/install", urlencodedParser, getInstall);
 
-  if (req.body.ubuntuVersion === "Ubuntu version") {
-    res.render("version", {
-      selectedVersions: selectedVersions,
-      ubuntuVersionError: "**Please choose any one version",
-      javaVersionError: "",
-    });
-  } else {
-    selectedVersions = {
-      ...selectedVersions,
-      ubuntu: req.body.ubuntuVersion,
-    };
-    isUbuntuSelected = true;
-  }
-
-  if (req.body.javaVersion === "Java version") {
-    res.render("version", {
-      selectedVersions: selectedVersions,
-      ubuntuVersionError: "",
-      javaVersionError: "**Please choose any one version",
-    });
-  } else {
-    selectedVersions = {
-      ...selectedVersions,
-      java: req.body.javaVersion,
-    };
-    isJavaSelected = true;
-  }
-
-  if (isUbuntuSelected && isJavaSelected) {
-    console.log(selectedTools);
-    console.log(selectedVersions);
-    res.render("server");
-  }
-});
-
-// step3
-app.get("/server", (req, res) => {
-  res.render("server");
-});
-
-// step4
-app.get("/install", (req, res) => {
-  res.render("install", {
-    port: jenkinsPort,
-    error: "",
-  });
-});
-
-app.post("/install", urlencodedParser, (req, res) => {
-  console.log(req.body);
-  if (!req.body.port) {
-    res.render("install", {
-      port: jenkinsPort,
-      error: "**Please enter Port",
-    });
-  } else {
-    jenkinsPort = { port: req.body.port };
-    res.render("success", {});
-  }
-});
-
-
-// step5
-app.get("/success", (req, res) => {
-  res.render("success");
-});
+app.post("/install", urlencodedParser, postInstall);
 
 app.listen(port, () => {
   console.log(`Tool Automation app is listening on port ${port}`);
 });
+
+// https://www.npmjs.com/package/selenium-webdriver
+// windows - env path
+// linux - sudo gedit /etc/environment => PATH=""
+// export PATH=$PATH:
